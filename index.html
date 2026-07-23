@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | PPID Kota Tangerang</title>
+    <meta name="description" content="Panel Admin PPID Kota Tangerang - Pejabat Pengelola Informasi dan Dokumentasi">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <img src="IMG_1775.PNG" alt="PPID Logo" class="brand-logo">
+            <span class="brand-text">PPID</span>
+        </div>
+
+        <nav class="sidebar-nav" id="sidebarNav">
+            <!-- Home -->
+            <a class="nav-link active" data-page="home" id="nav-home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+
+            <!-- Dashboard -->
+            <div class="nav-group">
+                <a class="nav-link has-sub" data-toggle="sub-dashboard" id="nav-dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                    <i class="fas fa-chevron-left nav-arrow"></i>
+                </a>
+                <div class="sub-menu" id="sub-dashboard">
+                    <a class="sub-link" data-page="monitoring" data-parent="nav-dashboard">Monitoring Permohonan</a>
+                    <a class="sub-link" data-page="pelaksana" data-parent="nav-dashboard">PPID Pelaksana</a>
+                </div>
+            </div>
+
+            <!-- Section Title -->
+            <div class="nav-section-title">Monitoring Antrian Registrasi</div>
+
+            <!-- Permohonan -->
+            <div class="nav-group">
+                <a class="nav-link has-sub" data-toggle="sub-permohonan" id="nav-permohonan">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Permohonan</span>
+                    <i class="fas fa-chevron-left nav-arrow"></i>
+                </a>
+                <div class="sub-menu" id="sub-permohonan">
+                    <a class="sub-link" data-page="antrian" data-parent="nav-permohonan">Daftar Antrian</a>
+                    <a class="sub-link" data-page="permohonan" data-parent="nav-permohonan">Kelola Permohonan</a>
+                </div>
+            </div>
+
+            <!-- Keberatan -->
+            <div class="nav-group">
+                <a class="nav-link has-sub" data-toggle="sub-keberatan" id="nav-keberatan">
+                    <i class="fas fa-file-signature"></i>
+                    <span>Keberatan</span>
+                    <i class="fas fa-chevron-left nav-arrow"></i>
+                </a>
+                <div class="sub-menu" id="sub-keberatan">
+                    <a class="sub-link" data-page="keberatan" data-parent="nav-keberatan">Daftar Keberatan</a>
+                </div>
+            </div>
+
+            <!-- Dokumen Informasi -->
+            <div class="nav-group">
+                <a class="nav-link has-sub" data-toggle="sub-dokumen" id="nav-dokumen">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Dokumen Informasi</span>
+                    <i class="fas fa-chevron-left nav-arrow"></i>
+                </a>
+                <div class="sub-menu" id="sub-dokumen">
+                    <a class="sub-link" data-page="dokumen" data-parent="nav-dokumen">Kelola Dokumen</a>
+                </div>
+            </div>
+
+            <!-- Daftar Pembantu -->
+            <a class="nav-link" data-page="pembantu" id="nav-pembantu">
+                <i class="fas fa-users"></i>
+                <span>Daftar Pembantu</span>
+            </a>
+
+            <!-- Dasar Hukum -->
+            <a class="nav-link" data-page="hukum" id="nav-hukum">
+                <i class="fas fa-gavel"></i>
+                <span>Dasar Hukum</span>
+            </a>
+
+            <!-- Setting Profil -->
+            <a class="nav-link" data-page="settings" id="nav-settings">
+                <i class="fas fa-cog"></i>
+                <span>Setting Profil</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-content" id="mainContent">
+        <!-- Top Header -->
+        <header class="top-header" id="topHeader">
+            <button class="hamburger-btn" id="hamburgerBtn" title="Toggle Sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="header-right">
+                <button class="header-icon-btn" title="Profil">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="header-icon-btn" title="Menu">
+                    <i class="fas fa-th"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Page Container -->
+        <div class="page-container" id="pageContainer">
+
+            <!-- ==================== PAGE: HOME / Overview ==================== -->
+            <section class="page active" id="page-home">
+                <div class="page-date" id="homeDate"></div>
+                <div class="welcome-banner">
+                    <div class="welcome-text">
+                        <h1 class="welcome-title">Selamat Datang, <span id="welcomeName">Admin PPID</span> 👋</h1>
+                        <p class="welcome-subtitle">Berikut ringkasan aktivitas layanan informasi publik PPID Kota Tangerang.</p>
+                    </div>
+                </div>
+
+                <!-- Ringkasan Semua Modul -->
+                <div class="summary-cards four-col">
+                    <div class="summary-card card-dark home-clickable" data-nav="monitoring">
+                        <div class="summary-icon"><i class="fas fa-inbox"></i></div>
+                        <div class="summary-info">
+                            <div class="summary-label" id="homePermohonanLabel">TOTAL PERMOHONAN BULAN INI</div>
+                            <div class="summary-value" id="homeTotalPermohonan">0</div>
+                        </div>
+                    </div>
+                    <div class="summary-card card-orange home-clickable" data-nav="antrian">
+                        <div class="summary-icon"><i class="fas fa-clock"></i></div>
+                        <div class="summary-info">
+                            <div class="summary-label">ANTRIAN BELUM DIPUTUSKAN</div>
+                            <div class="summary-value" id="homeAntrianPending">0</div>
+                        </div>
+                    </div>
+                    <div class="summary-card card-red home-clickable" data-nav="keberatan">
+                        <div class="summary-icon"><i class="fas fa-file-signature"></i></div>
+                        <div class="summary-info">
+                            <div class="summary-label">KEBERATAN DALAM PROSES</div>
+                            <div class="summary-value" id="homeKeberatan">0</div>
+                        </div>
+                    </div>
+                    <div class="summary-card card-green home-clickable" data-nav="dokumen">
+                        <div class="summary-icon"><i class="fas fa-folder-open"></i></div>
+                        <div class="summary-info">
+                            <div class="summary-label">DOKUMEN INFORMASI TERSIMPAN</div>
+                            <div class="summary-value" id="homeDokumen">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detail Antrian & Keberatan -->
+                <div class="dashboard-row two-col">
+                    <div class="card">
+                        <h3 class="card-title">Ringkasan Antrian Registrasi</h3>
+                        <div class="home-stat-list">
+                            <div class="home-stat-row"><span>Total Antrian</span><strong id="homeAntrianTotal">0</strong></div>
+                            <div class="home-stat-row"><span>Selesai</span><strong id="homeAntrianSelesai">0</strong></div>
+                            <div class="home-stat-row"><span>Belum Diputuskan</span><strong id="homeAntrianBelum">0</strong></div>
+                            <div class="home-stat-row"><span>Menunggu Perbaikan</span><strong id="homeAntrianPerbaikan">0</strong></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Ringkasan Bantuan PPID Pelaksana</h3>
+                        <div class="home-stat-list">
+                            <div class="home-stat-row"><span>Total Permohonan Bantuan</span><strong id="homePelTotal">0</strong></div>
+                            <div class="home-stat-row"><span>Diterima</span><strong id="homePelDiterima">0</strong></div>
+                            <div class="home-stat-row"><span>Ditolak</span><strong id="homePelDitolak">0</strong></div>
+                            <div class="home-stat-row"><span>Perlu Respon</span><strong id="homePelRespon">0</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shortcut Menu Cepat -->
+                <div class="card">
+                    <h3 class="card-title">Menu Cepat</h3>
+                    <div class="quick-access-grid">
+                        <button class="quick-access-card" data-nav="monitoring"><i class="fas fa-tachometer-alt"></i><span>Monitoring Permohonan</span></button>
+                        <button class="quick-access-card" data-nav="pelaksana"><i class="fas fa-chart-line"></i><span>PPID Pelaksana</span></button>
+                        <button class="quick-access-card" data-nav="antrian"><i class="fas fa-list-ol"></i><span>Daftar Antrian</span></button>
+                        <button class="quick-access-card" data-nav="permohonan"><i class="fas fa-file-alt"></i><span>Kelola Permohonan</span></button>
+                        <button class="quick-access-card" data-nav="keberatan"><i class="fas fa-file-signature"></i><span>Daftar Keberatan</span></button>
+                        <button class="quick-access-card" data-nav="dokumen"><i class="fas fa-folder-open"></i><span>Kelola Dokumen</span></button>
+                        <button class="quick-access-card" data-nav="pembantu"><i class="fas fa-users"></i><span>Daftar Pembantu</span></button>
+                        <button class="quick-access-card" data-nav="hukum"><i class="fas fa-gavel"></i><span>Dasar Hukum</span></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== PAGE: MONITORING PERMOHONAN (Dashboard Charts) ==================== -->
+            <section class="page" id="page-monitoring">
+                <div class="page-date" id="currentDateTime"></div>
+                <div class="page-title-row">
+                    <h1 class="page-title" id="dashboardTitle">DASHBOARD MONITORING PERMOHONAN JUNI 2026</h1>
+                    <div class="filter-group">
+                        <label>Bulan:</label>
+                        <select id="filterBulan" class="filter-select">
+                            <option value="Januari">Januari</option>
+                            <option value="Februari">Februari</option>
+                            <option value="Maret">Maret</option>
+                            <option value="April">April</option>
+                            <option value="Mei">Mei</option>
+                            <option value="Juni">Juni</option>
+                            <option value="Juli" selected>Juli</option>
+                            <option value="Agustus">Agustus</option>
+                            <option value="September">September</option>
+                            <option value="Oktober">Oktober</option>
+                            <option value="November">November</option>
+                            <option value="Desember">Desember</option>
+                        </select>
+                        <label>Tahun:</label>
+                        <select id="filterTahun" class="filter-select">
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026" selected>2026</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Row 1: Total + OPD Chart -->
+                <div class="dashboard-row two-col">
+                    <div class="card card-total">
+                        <div class="total-number" id="totalPermohonan">37</div>
+                        <div class="total-label" id="totalPermohonanLabel">Total Permohonan Masuk Juli 2026</div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title" id="opdChartTitle">5 OPD Termohon Terbanyak Juli 2026</h3>
+                        <div class="chart-container chart-bar-h">
+                            <canvas id="chartOPD"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Status Keputusan + Media Pengajuan -->
+                <div class="dashboard-row two-col">
+                    <div class="card">
+                        <h3 class="card-title" id="statusChartTitle">Status Keputusan PPID Juli 2026</h3>
+                        <div class="chart-container chart-donut">
+                            <canvas id="chartStatusKeputusan"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title" id="mediaChartTitle">Berdasarkan Media Pengajuan Juli 2026</h3>
+                        <div class="chart-container chart-donut">
+                            <canvas id="chartMedia"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3: Kategori Pengajuan -->
+                <div class="dashboard-row one-col">
+                    <div class="card">
+                        <h3 class="card-title" id="kategoriChartTitle">Kategori Pengajuan Juli 2026</h3>
+                        <div class="chart-container chart-bar-v">
+                            <canvas id="chartKategori"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== PAGE: PPID PELAKSANA ==================== -->
+            <section class="page" id="page-pelaksana">
+                <!-- Summary Cards -->
+                <div class="summary-cards four-col">
+                    <div class="summary-card card-dark">
+                        <div class="summary-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="summary-info">
+                            <div class="summary-label">TOTAL BANTUAN PPID PELAKSANA</div>
+                            <div class="summary-value" id="pelTotalBantuan">215</div>
+                        </div>
+                    </div>
+                    <div class="summary-card card-orange">
+                        <div class="summary-label">PERMOHONAN BANTUAN PERLU RESPON</div>
+                        <div class="summary-value" id="pelPerluRespon">23</div>
+                    </div>
+                    <div class="summary-card card-green">
+                        <div class="summary-label">BANTUAN DITERIMA UTAMA</div>
+                        <div class="summary-value" id="pelDiterima">160</div>
+                    </div>
+                    <div class="summary-card card-red">
+                        <div class="summary-label">BANTUAN DITOLAK UTAMA</div>
+                        <div class="summary-value" id="pelDitolak">32</div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="dashboard-row two-col-wide">
+                    <div class="card">
+                        <h3 class="card-title">DISTRIBUSI PERMOHONAN BANTUAN PER PPID PELAKSANA (OPD)</h3>
+                        <div class="chart-container chart-stacked">
+                            <canvas id="chartDistribusiOPD"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">RINGKASAN STATUS BANTUAN UTAMA</h3>
+                        <div class="chart-container chart-donut">
+                            <canvas id="chartRingkasanStatus"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table: Daftar Permohonan Bantuan -->
+                <div class="card">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                        <h3 class="card-title" style="margin-bottom:0">DAFTAR PERMOHONAN BANTUAN PPID PELAKSANA TERBARU</h3>
+                        <button class="btn btn-primary" onclick="addPelaksanaBantuan()"><i class="fas fa-plus"></i> Tambah Bantuan</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table" id="tablePelaksana">
+                            <thead>
+                                <tr>
+                                    <th>ID Permohonan</th>
+                                    <th>Asal PPID Pelaksana (OPD)</th>
+                                    <th>Tanggal Masuk</th>
+                                    <th>Subjek Bantuan</th>
+                                    <th>Status</th>
+                                    <th>Tindakan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pelaksanaTableBody">
+                                <!-- Filled by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== PAGE: MONITORING ANTRIAN ==================== -->
+            <section class="page" id="page-antrian">
+                <h1 class="page-title page-title-with-icon">
+                    <span>Monitoring Antrian Registrasi</span>
+                </h1>
+
+                <!-- Summary Cards -->
+                <div class="summary-cards four-col">
+                    <div class="summary-card card-white">
+                        <div class="summary-icon-box"><i class="fas fa-clipboard-list"></i></div>
+                        <div class="summary-info">
+                            <div class="summary-label-sm">Total Antrian</div>
+                            <div class="summary-value-lg" id="antrianTotal">130</div>
+                        </div>
+                    </div>
+                    <div class="summary-card card-white">
+                        <div class="summary-badge badge-orange">Belum Diputuskan</div>
+                        <div class="summary-value-lg text-dark" id="antrianBelum">10</div>
+                    </div>
+                    <div class="summary-card card-white">
+                        <div class="summary-badge-icon"><i class="fas fa-check-circle text-green"></i></div>
+                        <div class="summary-label-sm">Selesai (Diterima/Ditolak)</div>
+                        <div class="summary-value-lg text-dark" id="antrianSelesai">87</div>
+                    </div>
+                    <div class="summary-card card-white">
+                        <div class="summary-badge-icon"><i class="fas fa-sync-alt text-blue"></i></div>
+                        <div class="summary-label-sm">Menunggu Perbaikan</div>
+                        <div class="summary-value-lg text-dark" id="antrianPerbaikan">3</div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs-container">
+                    <div class="tabs">
+                        <button class="tab-btn" data-tab="kelengkapan">Kelengkapan Dokumen</button>
+                        <button class="tab-btn active" data-tab="putusan">Status Putusan (Belum Diputuskan)</button>
+                        <button class="tab-btn" data-tab="perbaikan">Status Perbaikan</button>
+                    </div>
+                </div>
+
+                <!-- Filter -->
+                <div class="table-filter">
+                    <input type="text" class="filter-input" id="antrianFilter" placeholder="Filter...">
+                </div>
+
+                <!-- Data Table -->
+                <div class="card card-table">
+                    <div class="table-responsive">
+                        <table class="data-table" id="tableAntrian">
+                            <thead>
+                                <tr>
+                                    <th class="th-check"><input type="checkbox" id="checkAll"></th>
+                                    <th>No. Register</th>
+                                    <th>Tanggal Masuk</th>
+                                    <th>Nama</th>
+                                    <th>Kategori</th>
+                                    <th>SLA</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="antrianTableBody">
+                                <!-- Filled by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="pagination-container">
+                        <div class="pagination" id="antrianPagination">
+                            <!-- Filled by JS -->
+                        </div>
+                        <div class="pagination-info">
+                            <span id="antrianRowInfo">7 Baris</span>
+                            <button class="page-nav-btn" id="antrianPrevPage"><i class="fas fa-chevron-left"></i></button>
+                            <button class="page-nav-btn" id="antrianNextPage"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== PAGE: PERMOHONAN ==================== -->
+            <section class="page" id="page-permohonan">
+                <div class="page-header-row">
+                    <h1 class="page-title">Kelola Permohonan</h1>
+                    <button class="btn btn-primary" id="btnAddPermohonan"><i class="fas fa-plus"></i> Tambah Permohonan</button>
+                </div>
+
+                <div class="card card-table">
+                    <div class="table-toolbar">
+                        <input type="text" class="filter-input" id="permohonanFilter" placeholder="Cari permohonan...">
+                        <select class="filter-select" id="permohonanStatusFilter">
+                            <option value="">Semua Status</option>
+                            <option value="Belum Diputuskan">Belum Diputuskan</option>
+                            <option value="Diterima">Diterima</option>
+                            <option value="Ditolak">Ditolak</option>
+                            <option value="Perbaikan">Perbaikan</option>
+                        </select>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table" id="tablePermohonan">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>No. Register</th>
+                                    <th>Pemohon</th>
+                                    <th>Kategori</th>
+                                    <th>Informasi</th>
+                                    <th>Tanggal</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="permohonanTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== PAGE: KEBERATAN ==================== -->
+            <section class="page" id="page-keberatan">
+                <div class="page-header-row">
+                    <h1 class="page-title">Daftar Keberatan</h1>
+                    <button class="btn btn-primary" id="btnAddKeberatan"><i class="fas fa-plus"></i> Tambah Keberatan</button>
+                </div>
+                <div class="card card-table">
+                    <div class="table-toolbar">
+                        <input type="text" class="filter-input" id="keberatanFilter" placeholder="Cari keberatan...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table" id="tableKeberatan">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Pemohon</th>
+                                    <th>No. Permohonan</th>
+                                    <th>Tanggal</th>
+                                    <th>Alasan</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="keberatanTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== PAGE: DOKUMEN ==================== -->
+            <section class="page" id="page-dokumen">
+                <div class="page-header-row">
+                    <h1 class="page-title">Dokumen Informasi</h1>
+                    <button class="btn btn-primary" id="btnAddDokumen"><i class="fas fa-upload"></i> Upload Dokumen</button>
+                </div>
+                <div class="card card-table">
+                    <div class="table-toolbar">
+                        <input type="text" class="filter-input" id="dokumenFilter" placeholder="Cari dokumen...">
+                        <select class="filter-select" id="dokumenKategoriFilter">
+                            <option value="">Semua Kategori</option>
+                            <option value="Informasi Berkala">Informasi Berkala</option>
+                            <option value="Informasi Serta Merta">Informasi Serta Merta</option>
+                            <option value="Informasi Setiap Saat">Informasi Setiap Saat</option>
+                            <option value="Informasi Dikecualikan">Informasi Dikecualikan</option>
+                        </select>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table" id="tableDokumen">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Judul Dokumen</th>
+                                    <th>Kategori</th>
+                                    <th>Tanggal Upload</th>
+                                    <th>Ukuran</th>
+                                    <th>Tipe</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dokumenTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== PAGE: DAFTAR PEMBANTU ==================== -->
+            <section class="page" id="page-pembantu">
+                <div class="page-header-row">
+                    <h1 class="page-title">Daftar PPID Pembantu</h1>
+                    <button class="btn btn-primary" id="btnAddPembantu"><i class="fas fa-plus"></i> Tambah Pembantu</button>
+                </div>
+                <div class="card card-table">
+                    <div class="table-toolbar">
+                        <input type="text" class="filter-input" id="pembantuFilter" placeholder="Cari OPD...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table" id="tablePembantu">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama OPD</th>
+                                    <th>Kepala / Pejabat</th>
+                                    <th>Telepon</th>
+                                    <th>Email</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pembantuTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== PAGE: DASAR HUKUM ==================== -->
+            <section class="page" id="page-hukum">
+                <div class="page-header-row">
+                    <h1 class="page-title">Dasar Hukum</h1>
+                    <button class="btn btn-primary" id="btnAddHukum"><i class="fas fa-plus"></i> Tambah Dasar Hukum</button>
+                </div>
+                <div class="card card-table">
+                    <div class="table-toolbar">
+                        <input type="text" class="filter-input" id="hukumFilter" placeholder="Cari dasar hukum...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table" id="tableHukum">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nomor</th>
+                                    <th>Judul</th>
+                                    <th>Kategori</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="hukumTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== PAGE: SETTINGS ==================== -->
+            <section class="page" id="page-settings">
+                <h1 class="page-title">Setting Profil</h1>
+                <div class="card card-form">
+                    <form id="formSettings">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-input" id="settNama" value="Administrator PPID">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">NIP</label>
+                                <input type="text" class="form-input" id="settNip" value="198501012010011001">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Jabatan</label>
+                                <input type="text" class="form-input" id="settJabatan" value="Admin PPID Utama">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" id="settEmail" value="admin@ppid.tangerangkota.go.id">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Telepon</label>
+                                <input type="text" class="form-input" id="settTelepon" value="021-55791234">
+                            </div>
+                        </div>
+                        <hr class="form-divider">
+                        <h3 class="form-section-title">Ganti Password</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Password Lama</label>
+                                <input type="password" class="form-input" id="settPassOld">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Password Baru</label>
+                                <input type="password" class="form-input" id="settPassNew">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan Perubahan</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            Copyright &copy; 2020 <a href="#" class="footer-link">Dinas Komunikasi dan Informatika</a> Kota Tangerang
+        </footer>
+    </main>
+
+    <!-- ========== MODAL: Detail Permohonan ========== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modalDetail">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Detail Permohonan</h3>
+                <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content -->
+            </div>
+            <div class="modal-footer" id="modalFooter">
+                <button class="btn btn-secondary" id="modalCloseBtn">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== TOAST NOTIFICATION ========== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/pelaksana.js"></script>
+    <script src="js/antrian.js"></script>
+</body>
+</html>
