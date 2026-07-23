@@ -118,9 +118,9 @@ function renderStatusKeputusanChart(data) {
         type: 'doughnut',
         data: {
             labels: [
-                `Diberikan Seluruhnya (${s.diberikanSeluruhnya}, Hijau Tua)`,
-                `Dalam Pengerjaan (${s.dalamPengerjaan}, Kuning)`,
-                `Ditolak/Sebagian (${s.ditolakSebagian}, Abu-abu)`
+                `Diberikan Seluruhnya (${s.diberikanSeluruhnya})`,
+                `Dalam Pengerjaan (${s.dalamPengerjaan})`,
+                `Ditolak/Sebagian (${s.ditolakSebagian})`
             ],
             datasets: [{
                 data: [s.diberikanSeluruhnya, s.dalamPengerjaan, s.ditolakSebagian || 0.1],

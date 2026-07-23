@@ -34,7 +34,13 @@ const PPID_DATA = {
                 { nama: 'Pendidikan', jumlah: 15 },
                 { nama: 'Perpajakan', jumlah: 3 },
                 { nama: 'Dokumen Kelengkapan', jumlah: 3 },
-                { nama: 'Lainnya', jumlah: 9 }
+                { nama: 'Lingkungan', jumlah: 2 },
+                { nama: 'Sosial', jumlah: 2 },
+                { nama: 'Transportasi', jumlah: 1 },
+                { nama: 'Kesehatan', jumlah: 1 },
+                { nama: 'Ekonomi', jumlah: 1 },
+                { nama: 'Perizinan', jumlah: 1 },
+                { nama: 'Sarana Prasarana', jumlah: 1 },
             ]
         },
         'Juni-2026': {
@@ -64,7 +70,10 @@ const PPID_DATA = {
                 { nama: 'Pendidikan', jumlah: 9 },
                 { nama: 'Dokumen Kelengkapan', jumlah: 3 },
                 { nama: 'Sosial', jumlah: 3 },
-                { nama: 'Lainnya', jumlah: 5 }
+                { nama: 'Lingkungan', jumlah: 2 },
+                { nama: 'Transportasi', jumlah: 1 },
+                { nama: 'Dokumen Resmi', jumlah: 1 },
+                { nama: 'Perizinan', jumlah: 1 },
             ]
         }
     },
