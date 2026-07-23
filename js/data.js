@@ -1,9 +1,18 @@
 // ============================================
+<<<<<<< HEAD
 // PPID Kota Tangerang 
+=======
+// PPID Kota Tangerang - Mock Data
+// Data sesuai screenshot referensi
+>>>>>>> 31788e1916d360237923f69af9b1ce860bf364f9
 // ============================================
 
 const PPID_DATA = {
     // ---- Dashboard Monitoring Permohonan, per periode (bulan-tahun) ----
+<<<<<<< HEAD
+=======
+    // Tambahkan entry baru di sini untuk bulan lain. Key format: 'NamaBulan-Tahun'
+>>>>>>> 31788e1916d360237923f69af9b1ce860bf364f9
     dashboardByPeriode: {
         'Mei-2026': {
             bulan: 'Mei',
@@ -73,6 +82,7 @@ const PPID_DATA = {
                 { nama: 'Dokumen Resmi', jumlah: 1 },
                 { nama: 'Perizinan', jumlah: 1 },
             ]
+<<<<<<< HEAD
         },
         'Juli-2026': {
             bulan: 'Juli',
@@ -111,6 +121,13 @@ const PPID_DATA = {
 
     // Dataset yang sedang aktif ditampilkan.
     // dashboard.js akan mengganti isi ini secara otomatis mengikuti bulan & tahun berjalan.
+=======
+        }
+    },
+
+    // Dataset yang sedang aktif ditampilkan (default: Juni 2026).
+    // dashboard.js akan mengganti isi ini saat filter bulan/tahun berubah.
+>>>>>>> 31788e1916d360237923f69af9b1ce860bf364f9
     dashboardMonitoring: null,
 
     // ---- PPID Pelaksana (Screenshot 3) ----
@@ -460,6 +477,12 @@ const PPID_DATA = {
     }
 };
 
+<<<<<<< HEAD
+=======
+// Set dataset aktif default (bulan yang tampil pertama kali saat halaman dibuka)
+PPID_DATA.dashboardMonitoring = PPID_DATA.dashboardByPeriode['Juni-2026'];
+
+>>>>>>> 31788e1916d360237923f69af9b1ce860bf364f9
 // Bulan options
 const BULAN_LIST = [
     'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
@@ -467,6 +490,7 @@ const BULAN_LIST = [
 ];
 
 const TAHUN_LIST = [2024, 2025, 2026];
+<<<<<<< HEAD
 
 // ---- Set dataset aktif default: otomatis ikut bulan & tahun berjalan ----
 // Kalau data bulan berjalan belum tersedia, fallback ke periode terbaru yang ada.
@@ -481,3 +505,5 @@ const TAHUN_LIST = [2024, 2025, 2026];
         PPID_DATA.dashboardMonitoring = PPID_DATA.dashboardByPeriode[keys[keys.length - 1]];
     }
 })();
+=======
+>>>>>>> 31788e1916d360237923f69af9b1ce860bf364f9
