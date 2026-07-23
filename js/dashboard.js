@@ -383,7 +383,6 @@ document.getElementById('filterTahun').addEventListener('change', function() {
     const bulan = document.getElementById('filterBulan').value;
     switchPeriode(bulan, parseInt(this.value));
 });
-<<<<<<< HEAD
 
 // ---- Set nilai dropdown filter mengikuti bulan & tahun berjalan saat halaman dimuat ----
 (function setDefaultFilterUI() {
@@ -401,5 +400,3 @@ document.getElementById('filterTahun').addEventListener('change', function() {
         selTahun.value = tahunSekarang;
     }
 })();
-=======
->>>>>>> 31788e1916d360237923f69af9b1ce860bf364f9
